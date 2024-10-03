@@ -32,7 +32,7 @@ source("../US_mapping/us_mapping.R")
 invisible(sapply(list.files("../r/", full.names = T), source))
 
 # main dir
-main_dir <- ""
+main_dir <- "FILEPATH"
 
 # Round specific variables
 gbd_id <- 7
@@ -78,7 +78,7 @@ pops_2021_all <- get_population(release_id = 9, age_group_id = c(34,6:20, 30:32,
 pops <- rbindlist(list(pops_2021_all, pops), use.names = T)
 
 #---------------------------------------------------------------------------------
-# Figure 1. Map of AS smoking prevalence for adults and children from 1990 to 2021
+# Figure 1. Map of AS prevalence for adults and children from 1990 to 2021
 #---------------------------------------------------------------------------------
 color_palette <- colorRampPalette(brewer.pal(11, "RdYlBu"))(11)
 color_palette <- rev(color_palette)
@@ -114,7 +114,7 @@ for (age_grp in age_groups){
       plot_y <- "Prevalence overweight (%)"
     }
     
-    pdf(paste0(main_dir, "tables_and_figures/", "F1_",m,"_AS_map_",age_grp,"_US.pdf"),width=20,height=10)
+    pdf(paste0("FILEPATH"),width=20,height=10)
     for(y in years){
       for(s in sex){
         sex_name <- ifelse(s==1, "Males", 
@@ -138,7 +138,7 @@ for (age_grp in age_groups){
 }
 
 #-------------------------------------------------------------------------------------------------
-# Figure 2. Map of change of AS smoking prevalence between 1990 and 2021 and between 2021 and 2050
+# Figure 2. Map of change of AS prevalence between 1990 and 2021 and between 2021 and 2050
 #-------------------------------------------------------------------------------------------------
 
 age_groups <- c("2_14","5_14","2_24","5_24","15_24","25_125")
@@ -148,7 +148,7 @@ for (age_grp in age_groups){
   for(m in metrics){
     print(paste0("Plotting ", m, " for age group ", age_grp))
     # load data, keep countries only
-    prev_full <- fread(paste0(main_dir, "combined_", m, "_summary_usa.csv")) %>% .[location_level=="State"] %>% .[age_group==age_grp]
+    prev_full <- fread("FILEPATH") %>% .[location_level=="State"] %>% .[age_group==age_grp]
     
     for(y in c(2021, 2050)){
       prev <- unique(prev_full[year_id==y,.(year_id, location_id, location_name, sex_id, age_group, mean_AS_change, lower_AS_change, upper_AS_change,
@@ -185,7 +185,7 @@ for (age_grp in age_groups){
         plot_y <- "Percent change of overweight (%)"
       }
       
-      pdf(paste0(main_dir, "tables_and_figures/", "F2_",m,"_AS_pct_change_map_",age_grp,"_",y,"_usa.pdf"),width=20,height=10)
+      pdf(paste0("FILEPATH"),width=20,height=10)
       for(s in sex){
         sex_name <- ifelse(s==1, "Males", 
                            ifelse(s==2,"Females", "Both sexes"))
@@ -244,7 +244,7 @@ for (age_grp in age_groups){
     
     sex <- c(1,2,3)
     
-    pdf(paste0(main_dir, "tables_and_figures/", "F3_",m,"_lines_",age_grp,"_usa.pdf"),width=16,height=10)
+    pdf(paste0("FILEPATH"),width=16,height=10)
     for(s in sex){
       
       set.seed(135)
@@ -293,9 +293,9 @@ for (age_grp in age_groups){
 # plot only country level results of ow+ob, ob and ow by sex from 1990 to 2050 with UI
 for (age_grp in age_groups){
   # combine data for all metrics
-  ow <- fread(paste0(main_dir,"combined_ow_not_ob_summary_usa.csv")) %>% .[age_group == age_grp]
-  ob <- fread(paste0(main_dir,"combined_obesity_summary_usa.csv")) %>% .[age_group == age_grp]
-  ow_ob <- fread(paste0(main_dir,"combined_ow_and_ob_summary_usa.csv")) %>% .[age_group == age_grp]
+  ow <- fread("FILEPATH") %>% .[age_group == age_grp]
+  ob <- fread("FILEPATH") %>% .[age_group == age_grp]
+  ow_ob <- fread("FILEPATH") %>% .[age_group == age_grp]
   
   prev <- rbindlist(list(ow,ob,ow_ob), use.names = T)
   
@@ -318,7 +318,7 @@ for (age_grp in age_groups){
   
   sex <- c(1,2,3)
   
-  pdf(paste0(main_dir, "tables_and_figures/", "lines_plots_",age_grp,"_usa.pdf"),width=16,height=10)
+  pdf(paste0("FILEPATH"),width=16,height=10)
   for(s in sex){
     
     set.seed(135)
