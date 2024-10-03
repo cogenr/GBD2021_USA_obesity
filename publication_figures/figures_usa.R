@@ -3,6 +3,9 @@
 #--------------------------------------------------
 #-------------------------------------------------------------------------------
 # Figures/tables to use in the BMI US paper for adults and children, respectively
+# Figure 1. Map of AS prevalence for adults and children from 1990 to 2021
+# Figure 2. Map of change of AS prevalence between 1990 and 2021 and between 2021 and 2050
+# Figure 3. Line plots with the annual rate of change over time
 #-------------------------------------------------------------------------------
 
 ## SET-UP ##
